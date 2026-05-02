@@ -21,6 +21,31 @@
             font-family: 'Inter', sans-serif;
             background-color: #ffffff;
             overflow-x: hidden;
+            /* Custom Selection Color */
+            selection-background-color: #f97316;
+            selection-color: #ffffff;
+        }
+
+        ::selection {
+            background: #f97316;
+            color: white;
+        }
+
+        /* Custom Scrollbar for Desktop */
+        @media (min-width: 1024px) {
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #cbd5e1;
+                border-radius: 10px;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: #94a3b8;
+            }
         }
 
         .glass-card {
@@ -88,25 +113,45 @@
     <!-- Navigation -->
     <nav class="glass-nav fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center">
         <div class="text-2xl font-black tracking-tighter text-slate-900">A.O.E</div>
+        
+        <!-- Desktop Menu -->
         <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-700">
             <a href="#home" class="hover:text-orange-500 transition-colors">Home</a>
             <a href="#about" class="hover:text-orange-500 transition-colors">About</a>
             <a href="#gallery" class="hover:text-orange-500 transition-colors">Gallery</a>
             <a href="#contact" class="hover:text-orange-500 transition-colors">Contact</a>
         </div>
-        <!-- Mobile Menu Placeholder -->
-        <button class="md:hidden">
-            <i data-lucide="menu"></i>
+
+        <!-- Hamburger Button -->
+        <button id="menu-toggle" class="md:hidden text-slate-900 focus:outline-none z-[60]">
+            <i data-lucide="menu" id="menu-icon"></i>
         </button>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-white/90 backdrop-blur-2xl z-[55] flex flex-col items-center justify-center gap-8 transform translate-x-full transition-transform duration-500 ease-in-out md:hidden">
+            <a href="#home" class="mobile-link text-2xl font-black tracking-widest uppercase hover:text-orange-500">Home</a>
+            <a href="#about" class="mobile-link text-2xl font-black tracking-widest uppercase hover:text-orange-500">About</a>
+            <a href="#gallery" class="mobile-link text-2xl font-black tracking-widest uppercase hover:text-orange-500">Gallery</a>
+            <a href="#contact" class="mobile-link text-2xl font-black tracking-widest uppercase hover:text-orange-500">Contact</a>
+            
+            <div class="mt-12 text-center">
+                <p class="text-xs font-bold text-slate-400 tracking-[0.3em] uppercase mb-4">Follow Us</p>
+                <div class="flex gap-6 text-slate-900">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                    <i data-lucide="facebook" class="w-5 h-5"></i>
+                    <i data-lucide="twitter" class="w-5 h-5"></i>
+                </div>
+            </div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="min-h-screen flex flex-col items-center justify-center pt-20 px-6">
         <div class="max-w-5xl text-center" data-aos="fade-in" data-aos-duration="1500">
-            <h1 class="hero-text text-6xl md:text-8xl lg:text-9xl mb-4 text-slate-950 font-black">
+            <h1 class="hero-text text-5xl sm:text-6xl md:text-8xl lg:text-9xl mb-4 text-slate-950 font-black">
                 ACADEMY OF <br> EXCELLENCE
             </h1>
-            <p class="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto mb-8 font-medium">
+            <p class="text-lg md:text-2xl text-slate-600 max-w-2xl mx-auto mb-8 font-medium px-4">
                 Pioneering the future of education with technology-driven learning.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -271,7 +316,7 @@
         // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Three.js Abstract Mesh Background
+        // Three.js Abstract Mesh Background with Mouse Interaction
         const initThree = () => {
             const container = document.getElementById('three-container');
             const scene = new THREE.Scene();
@@ -281,37 +326,51 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             container.appendChild(renderer.domElement);
 
-            // Create a plane with a wireframe mesh
-            const geometry = new THREE.PlaneGeometry(20, 20, 40, 40);
+            const geometry = new THREE.PlaneGeometry(25, 25, 50, 50);
             const material = new THREE.MeshBasicMaterial({ 
-                color: 0x334155, // slate-700
+                color: 0x334155,
                 wireframe: true,
                 transparent: true,
-                opacity: 0.1 // Faint mesh
+                opacity: 0.12
             });
             const mesh = new THREE.Mesh(geometry, material);
             scene.add(mesh);
 
             mesh.rotation.x = -Math.PI / 3;
-            camera.position.z = 5;
+            camera.position.z = 8;
 
-            // Animate vertices for interactive wave effect
             const originalPositions = geometry.attributes.position.array.slice();
+            
+            // Mouse tracking
+            let mouseX = 0;
+            let mouseY = 0;
+            window.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) - 0.5;
+                mouseY = (e.clientY / window.innerHeight) - 0.5;
+            });
 
             const animate = () => {
                 requestAnimationFrame(animate);
                 
-                const time = Date.now() * 0.0005;
+                const time = Date.now() * 0.0004;
                 const positions = geometry.attributes.position.array;
 
                 for (let i = 0; i < positions.length; i += 3) {
                     const x = originalPositions[i];
                     const y = originalPositions[i + 1];
-                    positions[i + 2] = Math.sin(x + time) * 0.5 + Math.cos(y + time) * 0.5;
+                    // Wave influenced by time and subtly by mouse position
+                    const dist = Math.sqrt(x*x + y*y);
+                    positions[i + 2] = Math.sin(x + time + mouseX * 2) * 0.4 + 
+                                     Math.cos(y + time + mouseY * 2) * 0.4 +
+                                     Math.sin(dist * 0.5 - time) * 0.2;
                 }
                 
                 geometry.attributes.position.needsUpdate = true;
-                mesh.rotation.z += 0.001;
+                mesh.rotation.z += 0.0005;
+                
+                // Tilt mesh based on mouse
+                mesh.rotation.y = THREE.MathUtils.lerp(mesh.rotation.y, mouseX * 0.1, 0.05);
+                mesh.rotation.x = THREE.MathUtils.lerp(mesh.rotation.x, -Math.PI / 3 + mouseY * 0.1, 0.05);
                 
                 renderer.render(scene, camera);
             };
@@ -327,6 +386,39 @@
         };
 
         initThree();
+
+        // Mobile Menu Toggle Logic
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        let isMenuOpen = false;
+
+        const toggleMenu = () => {
+            isMenuOpen = !isMenuOpen;
+            
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('translate-x-full');
+                menuIcon.setAttribute('data-lucide', 'x');
+                document.body.style.overflow = 'hidden'; // Prevent scroll
+            } else {
+                mobileMenu.classList.add('translate-x-full');
+                menuIcon.setAttribute('data-lucide', 'menu');
+                document.body.style.overflow = ''; // Allow scroll
+            }
+            
+            lucide.createIcons(); // Refresh icons for the toggle
+        };
+
+        menuToggle.addEventListener('click', toggleMenu);
+
+        // Close menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (isMenuOpen) toggleMenu();
+            });
+        });
     </script>
 </body>
 </html>
