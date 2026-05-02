@@ -117,11 +117,26 @@
         </div>
         
         <!-- Desktop Menu -->
-        <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-700">
-            <a href="#home" class="hover:text-orange-500 transition-colors">Home</a>
-            <a href="#about" class="hover:text-orange-500 transition-colors">About</a>
-            <a href="#gallery" class="hover:text-orange-500 transition-colors">Gallery</a>
-            <a href="#contact" class="hover:text-orange-500 transition-colors">Contact</a>
+        <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-700 items-center">
+            <a href="index.html" class="hover:text-orange-500 transition-colors">Home</a>
+            
+            <!-- Dropdown Container -->
+            <div class="relative group h-full flex items-center">
+                <button class="hover:text-orange-500 transition-colors flex items-center gap-1 uppercase">
+                    About <i data-lucide="chevron-down" class="w-3 h-3 group-hover:rotate-180 transition-transform"></i>
+                </button>
+                <!-- Dropdown Menu -->
+                <div class="absolute top-[100%] left-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                    <div class="bg-white/90 backdrop-blur-xl border border-slate-100 shadow-2xl rounded-2xl p-4 w-56 flex flex-col gap-2">
+                        <a href="coaching.html" class="px-4 py-3 rounded-xl hover:bg-orange-50 hover:text-orange-600 transition-all font-bold">About Coaching</a>
+                        <a href="management.html" class="px-4 py-3 rounded-xl hover:bg-orange-50 hover:text-orange-600 transition-all font-bold">About Management</a>
+                        <a href="faculty.html" class="px-4 py-3 rounded-xl hover:bg-orange-50 hover:text-orange-600 transition-all font-bold">About Faculty</a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="index.html#gallery" class="hover:text-orange-500 transition-colors">Gallery</a>
+            <a href="index.html#contact" class="hover:text-orange-500 transition-colors">Contact</a>
         </div>
 
         <!-- Hamburger Button -->
@@ -145,10 +160,22 @@
             </div>
 
             <nav class="flex flex-col gap-6">
-                <a href="#home" class="mobile-link text-lg font-bold uppercase tracking-widest text-slate-900 hover:text-orange-500 transition-colors">Home</a>
-                <a href="#about" class="mobile-link text-lg font-bold uppercase tracking-widest text-slate-900 hover:text-orange-500 transition-colors">About</a>
-                <a href="#gallery" class="mobile-link text-lg font-bold uppercase tracking-widest text-slate-900 hover:text-orange-500 transition-colors">Gallery</a>
-                <a href="#contact" class="mobile-link text-lg font-bold uppercase tracking-widest text-slate-900 hover:text-orange-500 transition-colors">Contact</a>
+                <a href="index.html" class="mobile-link text-lg font-bold uppercase tracking-widest text-slate-900 hover:text-orange-500 transition-colors">Home</a>
+                
+                <!-- Mobile Accordion -->
+                <div class="flex flex-col">
+                    <button id="about-accordion-toggle" class="flex justify-between items-center text-lg font-bold uppercase tracking-widest text-slate-900 hover:text-orange-500 transition-colors w-full text-left">
+                        About <i data-lucide="chevron-down" id="accordion-arrow" class="w-4 h-4 transition-transform"></i>
+                    </button>
+                    <div id="about-accordion-menu" class="hidden flex flex-col gap-4 pl-4 mt-4 overflow-hidden transition-all duration-300">
+                        <a href="coaching.html" class="text-sm font-bold uppercase tracking-widest text-slate-500 hover:text-orange-500">About Coaching</a>
+                        <a href="management.html" class="text-sm font-bold uppercase tracking-widest text-slate-500 hover:text-orange-500">About Management</a>
+                        <a href="faculty.html" class="text-sm font-bold uppercase tracking-widest text-slate-500 hover:text-orange-500">About Faculty</a>
+                    </div>
+                </div>
+
+                <a href="index.html#gallery" class="mobile-link text-lg font-bold uppercase tracking-widest text-slate-900 hover:text-orange-500 transition-colors">Gallery</a>
+                <a href="index.html#contact" class="mobile-link text-lg font-bold uppercase tracking-widest text-slate-900 hover:text-orange-500 transition-colors">Contact</a>
             </nav>
 
             <div class="mt-auto pt-8 border-t border-slate-100">
@@ -208,7 +235,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Option: Coaching -->
-                <button onclick="showAboutPage('coaching')" class="glass-card p-10 rounded-[2.5rem] group hover:bg-white/60 transition-all text-center">
+                <a href="coaching.html" class="glass-card p-10 rounded-[2.5rem] group hover:bg-white/60 transition-all text-center">
                     <div class="w-20 h-20 bg-orange-500 text-white rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-transform">
                         <i data-lucide="graduation-cap" class="w-10 h-10"></i>
                     </div>
@@ -217,10 +244,10 @@
                     <span class="text-orange-500 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
                         View Details <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </span>
-                </button>
+                </a>
 
                 <!-- Option: Management -->
-                <button onclick="showAboutPage('management')" class="glass-card p-10 rounded-[2.5rem] group hover:bg-white/60 transition-all text-center">
+                <a href="management.html" class="glass-card p-10 rounded-[2.5rem] group hover:bg-white/60 transition-all text-center">
                     <div class="w-20 h-20 bg-slate-950 text-white rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-transform">
                         <i data-lucide="briefcase" class="w-10 h-10"></i>
                     </div>
@@ -229,10 +256,10 @@
                     <span class="text-orange-500 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
                         View Details <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </span>
-                </button>
+                </a>
 
                 <!-- Option: Faculty -->
-                <button onclick="showAboutPage('faculty')" class="glass-card p-10 rounded-[2.5rem] group hover:bg-white/60 transition-all text-center">
+                <a href="faculty.html" class="glass-card p-10 rounded-[2.5rem] group hover:bg-white/60 transition-all text-center">
                     <div class="w-20 h-20 bg-slate-950 text-white rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-transform">
                         <i data-lucide="users" class="w-10 h-10"></i>
                     </div>
@@ -241,101 +268,7 @@
                     <span class="text-orange-500 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
                         View Details <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </span>
-                </button>
-            </div>
-        </div>
-
-        <!-- Sub-Page: Coaching Detailed -->
-        <div id="about-coaching" class="hidden max-w-6xl mx-auto space-y-12">
-            <button onclick="hideAboutPages()" class="flex items-center gap-2 text-slate-500 hover:text-orange-500 font-bold uppercase text-xs tracking-widest transition-colors">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to About
-            </button>
-            <div class="glass-card p-8 md:p-16 rounded-[3rem]">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <h2 class="text-4xl md:text-5xl font-black text-slate-950 mb-6 uppercase">Coaching Excellence</h2>
-                        <p class="text-slate-600 mb-8 leading-relaxed">
-                            Our coaching methodology focus on conceptual clarity and rigorous practice. We provide specialized training for board exams, competitive entrance tests, and personality development. 
-                        </p>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="p-6 bg-white/40 rounded-2xl border border-white/40">
-                                <h5 class="font-black text-2xl">98%</h5>
-                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Success Rate</p>
-                            </div>
-                            <div class="p-6 bg-orange-500 text-white rounded-2xl">
-                                <h5 class="font-black text-2xl">24/7</h5>
-                                <p class="text-xs font-bold text-orange-100 uppercase tracking-widest">Doubt Support</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rounded-3xl overflow-hidden aspect-video shadow-2xl">
-                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=800" alt="Coaching" class="w-full h-full object-cover">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sub-Page: Management Detailed -->
-        <div id="about-management" class="hidden max-w-6xl mx-auto space-y-12">
-            <button onclick="hideAboutPages()" class="flex items-center gap-2 text-slate-500 hover:text-orange-500 font-bold uppercase text-xs tracking-widest transition-colors">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to About
-            </button>
-            <div class="glass-card p-8 md:p-16 rounded-[3rem]">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-4xl md:text-5xl font-black text-slate-950 mb-6 uppercase">Our Leadership</h2>
-                    <p class="text-slate-600">The management team at A.O.E is committed to creating an environment where intelligence meets character. Our vision is to empower students through transparency and innovation.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white/40 p-10 rounded-3xl border border-white/20">
-                        <i data-lucide="eye" class="w-8 h-8 text-orange-500 mb-6"></i>
-                        <h4 class="text-xl font-black mb-4 uppercase">Strategic Vision</h4>
-                        <p class="text-sm text-slate-500 leading-relaxed">Planning for the academic requirements of tomorrow, today.</p>
-                    </div>
-                    <div class="bg-slate-950 p-10 rounded-3xl text-white">
-                        <i data-lucide="shield-check" class="w-8 h-8 text-orange-500 mb-6"></i>
-                        <h4 class="text-xl font-black mb-4 uppercase">Institutional Integrity</h4>
-                        <p class="text-sm text-slate-300 leading-relaxed">Ensuring every student receives top-tier resources and support.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sub-Page: Faculty Detailed -->
-        <div id="about-faculty" class="hidden max-w-6xl mx-auto space-y-12">
-            <button onclick="hideAboutPages()" class="flex items-center gap-2 text-slate-500 hover:text-orange-500 font-bold uppercase text-xs tracking-widest transition-colors">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to About
-            </button>
-            <div class="glass-card p-8 md:p-16 rounded-[3rem]">
-                <h2 class="text-4xl md:text-5xl font-black text-slate-950 mb-12 text-center uppercase">Expert Faculty</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Faculty member 1 -->
-                    <div class="text-center">
-                        <div class="w-32 h-32 mx-auto rounded-full bg-slate-200 mb-6 overflow-hidden ring-4 ring-orange-500/20">
-                            <img src="https://images.unsplash.com/photo-1544717297-fa15739a5447?auto=format&fit=crop&q=80&w=300" alt="Faculty" class="w-full h-full object-cover">
-                        </div>
-                        <h5 class="text-xl font-black">Dr. R. Sharma</h5>
-                        <p class="text-xs font-bold text-orange-500 uppercase tracking-widest mb-4">Physics Expert</p>
-                        <p class="text-xs text-slate-500">Ex-IIT Faculty with 15+ years experience.</p>
-                    </div>
-                    <!-- Faculty member 2 -->
-                    <div class="text-center">
-                        <div class="w-32 h-32 mx-auto rounded-full bg-slate-200 mb-6 overflow-hidden ring-4 ring-orange-500/20">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=300" alt="Faculty" class="w-full h-full object-cover">
-                        </div>
-                        <h5 class="text-xl font-black">Prof. M. Azam</h5>
-                        <p class="text-xs font-bold text-orange-500 uppercase tracking-widest mb-4">Mathematics</p>
-                        <p class="text-xs text-slate-500">Mentored over 2000+ national level achievers.</p>
-                    </div>
-                    <!-- Faculty member 3 -->
-                    <div class="text-center">
-                        <div class="w-32 h-32 mx-auto rounded-full bg-slate-200 mb-6 overflow-hidden ring-4 ring-orange-500/20">
-                            <img src="https://images.unsplash.com/photo-1567532939604-b6c5b0ad2e01?auto=format&fit=crop&q=80&w=300" alt="Faculty" class="w-full h-full object-cover">
-                        </div>
-                        <h5 class="text-xl font-black">S. K. Singh</h5>
-                        <p class="text-xs font-bold text-orange-500 uppercase tracking-widest mb-4">Biology H.O.D</p>
-                        <p class="text-xs text-slate-500">Specialist in NEET and medical entrance exams.</p>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -573,7 +506,23 @@
         closeMenuBtn.addEventListener('click', closeMenu);
         menuBackdrop.addEventListener('click', closeMenu);
 
-        // About Sub-page Navigation Logic
+        // Mobile Accordion Logic
+        const accordionToggle = document.getElementById('about-accordion-toggle');
+        const accordionMenu = document.getElementById('about-accordion-menu');
+        const accordionArrow = document.getElementById('accordion-arrow');
+
+        accordionToggle.addEventListener('click', () => {
+            const isHidden = accordionMenu.classList.contains('hidden');
+            if (isHidden) {
+                accordionMenu.classList.remove('hidden');
+                accordionArrow.classList.add('rotate-180');
+            } else {
+                accordionMenu.classList.add('hidden');
+                accordionArrow.classList.remove('rotate-180');
+            }
+        });
+
+        // About Sub-page Navigation Logic (Keep for on-page interactions if any)
         const showAboutPage = (pageId) => {
             const hub = document.getElementById('about-hub');
             const subPage = document.getElementById(`about-${pageId}`);
