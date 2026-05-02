@@ -27,7 +27,7 @@ export default function App() {
         }}
       >
         <img
-          src="/logo.png"
+          src="logo.png"
           alt="Academy of Excellence logo"
           style={{
             width: '240px',
