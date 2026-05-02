@@ -70,7 +70,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.3; /* As requested: 0.3 opacity for readability */
+            opacity: 0.3; /* As requested: 0.3 opacity */
         }
 
         .hero-text {
@@ -173,11 +173,14 @@
 
     <!-- Hero Section -->
     <section id="home" class="min-h-screen flex flex-col items-center justify-center pt-20 px-6">
-        <div class="max-w-5xl text-center" data-aos="fade-in" data-aos-duration="1500">
-            <div class="flex justify-center mb-10">
-                <img src="/logo.png" alt="A.O.E Logo" class="w-48 h-48 md:w-64 md:h-64 object-contain">
+        <div class="max-w-5xl text-center relative" data-aos="fade-in" data-aos-duration="1500">
+            <!-- Scribble/Glow Background -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 md:w-96 md:h-96 bg-orange-200/40 blur-[80px] rounded-full -z-10 animate-pulse"></div>
+            
+            <div class="flex justify-center mb-10 relative">
+                <img src="/logo.png" alt="A.O.E Logo" class="w-48 h-48 md:w-64 md:h-64 object-contain relative z-10 drop-shadow-2xl">
             </div>
-            <h1 class="hero-text text-5xl sm:text-6xl md:text-8xl lg:text-9xl mb-4 text-slate-950 font-black">
+            <h1 class="hero-text text-5xl sm:text-6xl md:text-8xl lg:text-9xl mb-4 text-slate-950 font-black relative z-10">
                 ACADEMY OF <br> EXCELLENCE
             </h1>
             <p class="text-lg md:text-2xl text-slate-600 max-w-2xl mx-auto mb-8 font-medium px-4">
@@ -194,38 +197,144 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="min-h-screen flex items-center justify-center py-20 px-6 bg-transparent">
-        <div class="max-w-6xl w-full">
+    <!-- About Section Hub -->
+    <section id="about" class="min-h-screen py-20 px-6 bg-transparent relative z-10">
+        <div class="max-w-6xl mx-auto" id="about-hub">
             <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-sm uppercase tracking-[0.5em] text-orange-500 font-bold mb-2">Our impact</h2>
-                <h3 class="text-4xl md:text-5xl font-black text-slate-950">SHAPING MINDS SINCE 2010</h3>
+                <h2 class="text-sm uppercase tracking-[0.5em] text-orange-500 font-bold mb-2">Discovery Center</h2>
+                <h3 class="text-4xl md:text-5xl font-black text-slate-950">LEARN ABOUT A.O.E</h3>
+                <p class="text-slate-500 mt-4 max-w-xl mx-auto">Select a department below to explore our detailed programs, leadership, and expert educators.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Stat 1 -->
-                <div class="glass-card p-12 rounded-3xl text-center" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="w-16 h-16 bg-slate-950 text-white rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i data-lucide="users"></i>
+                <!-- Option: Coaching -->
+                <button onclick="showAboutPage('coaching')" class="glass-card p-10 rounded-[2.5rem] group hover:bg-white/60 transition-all text-center">
+                    <div class="w-20 h-20 bg-orange-500 text-white rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-transform">
+                        <i data-lucide="graduation-cap" class="w-10 h-10"></i>
                     </div>
-                    <div class="text-5xl font-black mb-2">500+</div>
-                    <div class="text-slate-500 uppercase tracking-widest text-xs font-bold">Students Passed</div>
+                    <h4 class="text-2xl font-black mb-4">OUR COACHING</h4>
+                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">Advanced pedagogy and result-oriented training modules.</p>
+                    <span class="text-orange-500 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+                        View Details <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </button>
+
+                <!-- Option: Management -->
+                <button onclick="showAboutPage('management')" class="glass-card p-10 rounded-[2.5rem] group hover:bg-white/60 transition-all text-center">
+                    <div class="w-20 h-20 bg-slate-950 text-white rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-transform">
+                        <i data-lucide="briefcase" class="w-10 h-10"></i>
+                    </div>
+                    <h4 class="text-2xl font-black mb-4">MANAGEMENT</h4>
+                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">The visionary leadership driving Academy of Excellence forward.</p>
+                    <span class="text-orange-500 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+                        View Details <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </button>
+
+                <!-- Option: Faculty -->
+                <button onclick="showAboutPage('faculty')" class="glass-card p-10 rounded-[2.5rem] group hover:bg-white/60 transition-all text-center">
+                    <div class="w-20 h-20 bg-slate-950 text-white rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-transform">
+                        <i data-lucide="users" class="w-10 h-10"></i>
+                    </div>
+                    <h4 class="text-2xl font-black mb-4">EXPERT FACULTY</h4>
+                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">Meet our rank-holding educators and subject matter experts.</p>
+                    <span class="text-orange-500 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+                        View Details <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sub-Page: Coaching Detailed -->
+        <div id="about-coaching" class="hidden max-w-6xl mx-auto space-y-12">
+            <button onclick="hideAboutPages()" class="flex items-center gap-2 text-slate-500 hover:text-orange-500 font-bold uppercase text-xs tracking-widest transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to About
+            </button>
+            <div class="glass-card p-8 md:p-16 rounded-[3rem]">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-black text-slate-950 mb-6 uppercase">Coaching Excellence</h2>
+                        <p class="text-slate-600 mb-8 leading-relaxed">
+                            Our coaching methodology focus on conceptual clarity and rigorous practice. We provide specialized training for board exams, competitive entrance tests, and personality development. 
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-6 bg-white/40 rounded-2xl border border-white/40">
+                                <h5 class="font-black text-2xl">98%</h5>
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Success Rate</p>
+                            </div>
+                            <div class="p-6 bg-orange-500 text-white rounded-2xl">
+                                <h5 class="font-black text-2xl">24/7</h5>
+                                <p class="text-xs font-bold text-orange-100 uppercase tracking-widest">Doubt Support</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rounded-3xl overflow-hidden aspect-video shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=800" alt="Coaching" class="w-full h-full object-cover">
+                    </div>
                 </div>
-                <!-- Stat 2 -->
-                <div class="glass-card p-12 rounded-3xl text-center" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="w-16 h-16 bg-orange-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-xl">
-                        <i data-lucide="book-open"></i>
-                    </div>
-                    <div class="text-5xl font-black mb-2">120+</div>
-                    <div class="text-slate-500 uppercase tracking-widest text-xs font-bold">Current Batch</div>
+            </div>
+        </div>
+
+        <!-- Sub-Page: Management Detailed -->
+        <div id="about-management" class="hidden max-w-6xl mx-auto space-y-12">
+            <button onclick="hideAboutPages()" class="flex items-center gap-2 text-slate-500 hover:text-orange-500 font-bold uppercase text-xs tracking-widest transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to About
+            </button>
+            <div class="glass-card p-8 md:p-16 rounded-[3rem]">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-4xl md:text-5xl font-black text-slate-950 mb-6 uppercase">Our Leadership</h2>
+                    <p class="text-slate-600">The management team at A.O.E is committed to creating an environment where intelligence meets character. Our vision is to empower students through transparency and innovation.</p>
                 </div>
-                <!-- Stat 3 -->
-                <div class="glass-card p-12 rounded-3xl text-center" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="w-16 h-16 bg-slate-950 text-white rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i data-lucide="award"></i>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white/40 p-10 rounded-3xl border border-white/20">
+                        <i data-lucide="eye" class="w-8 h-8 text-orange-500 mb-6"></i>
+                        <h4 class="text-xl font-black mb-4 uppercase">Strategic Vision</h4>
+                        <p class="text-sm text-slate-500 leading-relaxed">Planning for the academic requirements of tomorrow, today.</p>
                     </div>
-                    <div class="text-5xl font-black mb-2">Expert</div>
-                    <div class="text-slate-500 uppercase tracking-widest text-xs font-bold">Faculty Rank</div>
+                    <div class="bg-slate-950 p-10 rounded-3xl text-white">
+                        <i data-lucide="shield-check" class="w-8 h-8 text-orange-500 mb-6"></i>
+                        <h4 class="text-xl font-black mb-4 uppercase">Institutional Integrity</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">Ensuring every student receives top-tier resources and support.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sub-Page: Faculty Detailed -->
+        <div id="about-faculty" class="hidden max-w-6xl mx-auto space-y-12">
+            <button onclick="hideAboutPages()" class="flex items-center gap-2 text-slate-500 hover:text-orange-500 font-bold uppercase text-xs tracking-widest transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to About
+            </button>
+            <div class="glass-card p-8 md:p-16 rounded-[3rem]">
+                <h2 class="text-4xl md:text-5xl font-black text-slate-950 mb-12 text-center uppercase">Expert Faculty</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Faculty member 1 -->
+                    <div class="text-center">
+                        <div class="w-32 h-32 mx-auto rounded-full bg-slate-200 mb-6 overflow-hidden ring-4 ring-orange-500/20">
+                            <img src="https://images.unsplash.com/photo-1544717297-fa15739a5447?auto=format&fit=crop&q=80&w=300" alt="Faculty" class="w-full h-full object-cover">
+                        </div>
+                        <h5 class="text-xl font-black">Dr. R. Sharma</h5>
+                        <p class="text-xs font-bold text-orange-500 uppercase tracking-widest mb-4">Physics Expert</p>
+                        <p class="text-xs text-slate-500">Ex-IIT Faculty with 15+ years experience.</p>
+                    </div>
+                    <!-- Faculty member 2 -->
+                    <div class="text-center">
+                        <div class="w-32 h-32 mx-auto rounded-full bg-slate-200 mb-6 overflow-hidden ring-4 ring-orange-500/20">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=300" alt="Faculty" class="w-full h-full object-cover">
+                        </div>
+                        <h5 class="text-xl font-black">Prof. M. Azam</h5>
+                        <p class="text-xs font-bold text-orange-500 uppercase tracking-widest mb-4">Mathematics</p>
+                        <p class="text-xs text-slate-500">Mentored over 2000+ national level achievers.</p>
+                    </div>
+                    <!-- Faculty member 3 -->
+                    <div class="text-center">
+                        <div class="w-32 h-32 mx-auto rounded-full bg-slate-200 mb-6 overflow-hidden ring-4 ring-orange-500/20">
+                            <img src="https://images.unsplash.com/photo-1567532939604-b6c5b0ad2e01?auto=format&fit=crop&q=80&w=300" alt="Faculty" class="w-full h-full object-cover">
+                        </div>
+                        <h5 class="text-xl font-black">S. K. Singh</h5>
+                        <p class="text-xs font-bold text-orange-500 uppercase tracking-widest mb-4">Biology H.O.D</p>
+                        <p class="text-xs text-slate-500">Specialist in NEET and medical entrance exams.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -295,7 +404,7 @@
     <footer class="bg-slate-950 text-white py-16 px-6">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
             <div class="max-w-xs">
-                <img src="/logo.png" alt="A.O.E" class="h-16 w-auto mb-6 brightness-0 invert">
+                <img src="/logo.png" alt="A.O.E" class="h-20 w-auto mb-6">
                 <p class="text-slate-400 leading-relaxed">
                     Empowering students with knowledge, character, and vision for a brighter tomorrow. Join the elite.
                 </p>
@@ -365,9 +474,20 @@
             const mesh = new THREE.Mesh(geometry, material);
             scene.add(mesh);
 
+            // Floating Hero Shape
+            const sphereGeom = new THREE.IcosahedronGeometry(1.5, 1);
+            const sphereMat = new THREE.MeshBasicMaterial({ 
+                color: 0xf97316, 
+                wireframe: true,
+                transparent: true,
+                opacity: 0.4
+            });
+            const floatingShape = new THREE.Mesh(sphereGeom, sphereMat);
+            scene.add(floatingShape);
+
             mesh.rotation.x = -Math.PI / 3;
             camera.position.z = 8;
-
+            
             const originalPositions = geometry.attributes.position.array.slice();
             
             // Mouse tracking
@@ -383,6 +503,13 @@
                 
                 const time = Date.now() * 0.0004;
                 const positions = geometry.attributes.position.array;
+
+                // Animate Floating Shape
+                floatingShape.rotation.y += 0.01;
+                floatingShape.rotation.x += 0.005;
+                floatingShape.position.y = Math.sin(time * 2) * 0.5;
+                floatingShape.position.x = mouseX * 2;
+                floatingShape.position.z = mouseY * 2;
 
                 for (let i = 0; i < positions.length; i += 3) {
                     const x = originalPositions[i];
@@ -445,6 +572,37 @@
         menuToggle.addEventListener('click', openMenu);
         closeMenuBtn.addEventListener('click', closeMenu);
         menuBackdrop.addEventListener('click', closeMenu);
+
+        // About Sub-page Navigation Logic
+        const showAboutPage = (pageId) => {
+            const hub = document.getElementById('about-hub');
+            const subPage = document.getElementById(`about-${pageId}`);
+            
+            // Fade out hub
+            hub.classList.add('hidden');
+            
+            // Show target sub-page
+            subPage.classList.remove('hidden');
+            
+            // Scroll to top of section smoothly
+            document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+            
+            lucide.createIcons();
+        };
+
+        const hideAboutPages = () => {
+            const hub = document.getElementById('about-hub');
+            const subPages = [
+                document.getElementById('about-coaching'),
+                document.getElementById('about-management'),
+                document.getElementById('about-faculty')
+            ];
+            
+            subPages.forEach(p => p.classList.add('hidden'));
+            hub.classList.remove('hidden');
+            
+            document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+        };
 
         // Close menu when a link is clicked
         mobileLinks.forEach(link => {
